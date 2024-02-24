@@ -7,7 +7,7 @@ public class CameraFollow : MonoBehaviour
     public Transform followTransform;
     void Start()
     {
-        this.transform.rotation = Quaternion.AngleAxis(45, Vector3.forward);
+        //this.transform.rotation = Quaternion.AngleAxis(45, Vector3.forward);
     }
 
     // Update is called once per frame
