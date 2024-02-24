@@ -11,6 +11,7 @@ public class Entity : MonoBehaviour
     [SerializeField] public float shield;
     [SerializeField] public float shieldCapacity;
     [SerializeField] public float attackPoints;
+    [SerializeField] public float moveSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -23,4 +24,6 @@ public class Entity : MonoBehaviour
     {
         
     }
+
+    // add getter setter if necessary
 }
