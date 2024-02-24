@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -14,8 +15,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     { 
         // Vector responsible for player inpud (WASD), and converts that input into horizontal/vertical 3d vector with a nil value for the z-axis.
-        Vector3 PlayerMovement = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
-
+        UnityEngine.Vector3 PlayerMovement = UnityEngine.Quaternion.AngleAxis(45, UnityEngine.Vector3.forward) * new UnityEngine.Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
         // Controls the velocity of the player.
         rb.velocity = PlayerMovement * speed;
     }
