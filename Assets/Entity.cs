@@ -25,5 +25,5 @@ public class Entity : MonoBehaviour
         
     }
 
-    // add getter setter if necessary
+    // add getter setter if necessary (such as public turning into private)
 }

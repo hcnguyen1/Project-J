@@ -259,6 +259,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a7f1f79fbac3b4498be6f2a6fd58b39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HP: 0
+  HPCapacity: 0
+  shield: 0
+  shieldCapacity: 0
+  attackPoints: 0
+  moveSpeed: 8
   rb: {fileID: 2062246856}
   dashSpeed: 60
   dashLength: 0.1

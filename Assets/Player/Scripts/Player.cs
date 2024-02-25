@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : Entity
 {
-    // Controls player movement speed (Multiplies velocity by 8).
-    private float speed = 8f;  
 
     // The player
     [SerializeField] private Rigidbody2D rb;
@@ -20,8 +18,8 @@ public class PlayerMovement : MonoBehaviour
     private float dashCounter;
     private float dashCoolCounter;
 
-    public float invincibilityDuration = .1f;
-    public float iFramesCurrent;
+    private float iFramesCurrent;
+    private float invincibilityDuration = .1f;
 
     // Might be redundant to have enums..
     DashState isDashing;
@@ -30,7 +28,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        activeMoveSpeed = speed;
+        // Dash
+        activeMoveSpeed = moveSpeed;
         iFramesCurrent = 0;
         isDashing = DashState.Ready;
     }
@@ -39,12 +38,20 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     { 
+        moveCheck();
+        dashCheck();
+    }
+
+    private void moveCheck() {
         // Vector responsible for player inpud (WASD), and converts that input into horizontal/vertical 3d vector with a nil value for the z-axis.
         // UnityEngine.Vector3 PlayerMovement = UnityEngine.Quaternion.AngleAxis(45, UnityEngine.Vector3.forward) * new UnityEngine.Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
         UnityEngine.Vector3 PlayerMovement = new UnityEngine.Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
         // Controls the velocity of the player.
         rb.velocity = PlayerMovement * activeMoveSpeed;
+    }
 
+    // Dash Function
+    private void dashCheck() {
         // Dash Checks
         if(Input.GetKeyDown(KeyCode.Space))
         {
@@ -63,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
 
             if(dashCounter <= 0)
             {
-                activeMoveSpeed = speed;
+                activeMoveSpeed = moveSpeed;
                 dashCoolCounter = dashCooldown;
                 isDashing = DashState.Cooldown;
             }
