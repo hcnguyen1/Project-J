@@ -20,11 +20,19 @@ public class PlayerMovement : MonoBehaviour
     private float dashCounter;
     private float dashCoolCounter;
 
+    public float invincibilityDuration = .1f;
+    public float iFramesCurrent;
+
+    // Might be redundant to have enums..
+    DashState isDashing;
+
     // End of Dash Variables
 
     void Start()
     {
         activeMoveSpeed = speed;
+        iFramesCurrent = 0;
+        isDashing = DashState.Ready;
     }
 
 
@@ -44,6 +52,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 activeMoveSpeed = dashSpeed;
                 dashCounter = dashLength;
+                isDashing = DashState.Dashing;
+                iFramesCurrent = invincibilityDuration;
             }
         }
 
@@ -55,15 +65,28 @@ public class PlayerMovement : MonoBehaviour
             {
                 activeMoveSpeed = speed;
                 dashCoolCounter = dashCooldown;
+                isDashing = DashState.Cooldown;
             }
         }
 
         if(dashCoolCounter > 0)
         {
             dashCoolCounter -= Time.deltaTime;
+            isDashing = DashState.Ready;
         }
 
+        if(iFramesCurrent > 0)
+        {
+            iFramesCurrent -= Time.deltaTime;
+        }
         // End of Dash Checks
     }
 
+}
+
+public enum DashState
+{
+    Ready,
+    Dashing,
+    Cooldown
 }
