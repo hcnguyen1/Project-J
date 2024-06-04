@@ -7,7 +7,7 @@ public class SampleEnemy : Entity
 {
 
     
-    public Transform playerTransform; // Assign the player's transform in the Inspector
+    public Transform playerTransform; // Assign the player's transform in the Inspector (Use GameObject.find("Player") instead)
 
     private void Start()
     {
@@ -29,4 +29,13 @@ public class SampleEnemy : Entity
         // Move the enemy towards the player
         transform.position += direction * moveSpeed * Time.deltaTime;
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        // Attack Range
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(transform.position, playerTransform.position);
+    }
+
+    
 }
